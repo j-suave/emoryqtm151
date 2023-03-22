@@ -43,6 +43,7 @@ Delete existing table
 -- Comments are written with double dashes "--" rather than hastag (#)
 
 DROP TABLE IF EXISTS drivers;
+
 -- SQLBook: Markup
 <font size = "5">
 
@@ -58,6 +59,7 @@ CREATE TABLE drivers(
     nationality varchar(15),
     victories int
 );    
+
 -- SQLBook: Markup
 <font size="5"> 
 
@@ -99,8 +101,8 @@ Try it yourself!
 -- Select a new driver id (needs to be unique)
 -- Make sure to deparate arguments by a semicolon!
 
-
-
+INSERT INTO drivers VALUES (5, 'John Jaquez', 'Dominican', 444);
+INSERT INTO drivers VALUES (6, 'Makari Jones', 'Jamaican', 773);
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Dataset Operations </span>
@@ -113,7 +115,7 @@ Extracting columns from table
 -- SELECT extracts certain COLUMNS
 -- FROM is used to indicate the source table
 
-SELECT driver_id nationality FROM drivers;
+SELECT driver_id, nationality FROM drivers;
 -- SQLBook: Markup
 <font size="5"> 
 
@@ -132,7 +134,7 @@ WHERE nationality = 'German';
 
 -- Evalute OR conditions
 SELECT * FROM drivers
-WHERE (nationality = 'German') OR (nationality = 'British');
+WHERE (nationality = 'Spanish') OR (nationality = 'British');
 
 -- Evaluate AND conditions
 SELECT * FROM drivers
@@ -177,7 +179,7 @@ ORDER BY victories DESC;
 -- The following code would NOT work because we used double quotations
 -- "Double quotations" are used to refer to column names
 SELECT * FROM drivers
-WHERE nationality = 'German';
+WHERE nationality = "German";
 -- SQLBook: Markup
 <font size = "5">
 
@@ -188,9 +190,8 @@ with more than 60 victories
 -- SQLBook: Code
 -- Write your own code!
 
-
-
-
+SELECT nationality, driver_id FROM drivers
+WHERE (victories > 60);
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> III. Groupby + Chaining </span>
