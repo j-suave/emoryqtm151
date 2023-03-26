@@ -43,7 +43,6 @@ Delete existing table
 -- Comments are written with double dashes "--" rather than hastag (#)
 
 DROP TABLE IF EXISTS drivers;
-
 -- SQLBook: Markup
 <font size = "5">
 
@@ -59,7 +58,6 @@ CREATE TABLE drivers(
     nationality varchar(15),
     victories int
 );    
-
 -- SQLBook: Markup
 <font size="5"> 
 
@@ -101,8 +99,7 @@ Try it yourself!
 -- Select a new driver id (needs to be unique)
 -- Make sure to deparate arguments by a semicolon!
 
-INSERT INTO drivers VALUES (5, 'John Jaquez', 'Dominican', 444);
-INSERT INTO drivers VALUES (6, 'Makari Jones', 'Jamaican', 773);
+
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Dataset Operations </span>
@@ -134,7 +131,7 @@ WHERE nationality = 'German';
 
 -- Evalute OR conditions
 SELECT * FROM drivers
-WHERE (nationality = 'Spanish') OR (nationality = 'British');
+WHERE (nationality = 'United States') OR (nationality = 'Indian');
 
 -- Evaluate AND conditions
 SELECT * FROM drivers
@@ -149,12 +146,12 @@ Aggregate
 -- such as SUM() or AVG() 
 -- The AS is an alias which assigns a name to the aggregate statistic
 
-SELECT COUNT(*) AS num_rows,
-       SUM(victories) AS sum_victories,
+SELECT SUM(victories) AS sum_victories,
+       COUNT(*) AS num_rows,
        AVG(victories) AS mean_victories,
        MIN(victories) AS min_victories,
        MAX(victories) AS max_victories
-FROM drivers
+FROM drivers;
 -- SQLBook: Markup
 <font size="5"> 
 
@@ -179,7 +176,7 @@ ORDER BY victories DESC;
 -- The following code would NOT work because we used double quotations
 -- "Double quotations" are used to refer to column names
 SELECT * FROM drivers
-WHERE nationality = "German";
+WHERE nationality = 'German';
 -- SQLBook: Markup
 <font size = "5">
 
@@ -190,8 +187,7 @@ with more than 60 victories
 -- SQLBook: Code
 -- Write your own code!
 
-SELECT nationality, driver_id FROM drivers
-WHERE (victories > 60);
+
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> III. Groupby + Chaining </span>
@@ -254,8 +250,8 @@ Equivalence:
 
 **PYTHON** $\qquad \qquad \ \ $ **SQL** <br>
 ```[] ``` $\qquad \qquad \qquad \ \ \ $ ```SELECT``` <br>
-```.query() ``` $\qquad \qquad $ ```WHERE``` (before subsetting) <br>
-```.query() ``` $\qquad \qquad $ ```HAVING``` (after subsetting) <br>
+```.query() ``` $\qquad \qquad $ ```WHERE``` (before aggregating) <br>
+```.query() ``` $\qquad \qquad $ ```HAVING``` (after aggregating) <br>
 ```.groupby().agg() ``` $\ $ ```SELECT ... AS ... ```<br>
 $\qquad \qquad \qquad \qquad \ $```GROUP BY```<br>
 
