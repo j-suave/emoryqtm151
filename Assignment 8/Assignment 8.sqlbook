@@ -45,6 +45,10 @@ CREATE TABLE results (
     milliseconds int
 );
 
+COPY results
+FROM '/private/tmp/Assignment 8/data_raw/lap_times.csv'
+WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+
 -- SQLBook: Markup
 <font size = "5">
 
@@ -72,6 +76,10 @@ CREATE TABLE drivers (
     nationality varchar(255),
     url varchar(255)
 );
+
+COPY drivers 
+FROM '/private/tmp/Assignment 8/data_raw/drivers.csv'
+WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 
 -- SQLBook: Markup
 <font size = "5">
@@ -112,9 +120,9 @@ HINT: See the lecture 18 for details
 HINT: Include "driverId" in quotations since it has a mix of <br>
 upper case and lower case letters
 -- SQLBook: Code
--- Write your own code
 
-COUNT(DISTINCT "driverId")
+SELECT COUNT (DISTINCT "driverId" ) AS num_distinct_driverids
+FROM drivers
 
 -- SQLBook: Markup
 <font size = "5">
@@ -133,11 +141,10 @@ upper case and lower case letters
 -- Write your own code
 
 SELECT "driverId",
-        AVG(milliseconds) AS mean_victories
+        AVG(milliseconds) AS mean_milliseconds
 FROM results
-GROUP BY "driverID"
-ORDER BY SUM(points) 
-
+GROUP BY "driverId"
+ORDER by SUM(position)
 -- SQLBook: Markup
 <font size = "5">
 
@@ -154,5 +161,7 @@ HINT: Include "driverId" in quotations since it has a mix of <br>
 upper case and lower case letters
 -- SQLBook: Code
 -- Write your own code
-
-
+SELECT *
+FROM results
+LEFT JOIN drivers
+ON results."driverId" = drivers."driverId"
