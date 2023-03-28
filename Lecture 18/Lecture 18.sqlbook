@@ -35,7 +35,7 @@ United States Congress dataset
 
 Create table from codebook/dictionary
 -- SQLBook: Code
--- Active: 1679082813397@@127.0.0.1@5432@postgres
+-- Active: 1679515732880@@127.0.0.1@5432@postgres
 -- We start by deleting the old table
 -- SQL does not allow you to create a table if one already exists
 DROP TABLE IF EXISTS us_congress_members;
@@ -51,7 +51,6 @@ CREATE TABLE us_congress_members (
         party_name   varchar(30),
         chamber      varchar(30)
 );
-
 -- SQLBook: Code
 -- (i) The NOT NULL option is a special restrition saying
 --     that you are not allowed to enter missing data for this column
@@ -71,7 +70,6 @@ CREATE TABLE bills_actions (
         object      varchar(30),
         member_id   int
 );
-
 -- SQLBook: Markup
 <font size = "5">
 
@@ -88,14 +86,6 @@ Try it yourself!
 -- SQLBook: Code
 -- Write your own code
 
-DROP TABLE if EXISTS bills_subjects;
-
-CREATE TABLE bills_subjects (
-        "Congress" int, 
-        bill_number int, 
-        bill_type varchar(30),
-        bill_subject varchar(30) 
-);
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Import CSV into SQL </span>
@@ -133,10 +123,6 @@ WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 -----  FORMAT indicates that this is a CSV
 -----  HEADER MATCH indicates that the first row contains column
 -----  names and should be ignored when importing.
-
-COPY us_congress_members
-FROM '/private/tmp/QTM151 Lec 18 data/us_congress_members.csv'
-WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 -- SQLBook: Markup
 <font size = "5">
 
@@ -163,16 +149,15 @@ Try it yourself!
 SELECT * FROM us_congress_members
 ```
 -- SQLBook: Code
--- Active: 1679082813397@@127.0.0.1@5432@postgres
 -- Write your own code
 -- Note in the instructor's computer this is:
 -- You just have to change the FROM argument
 --
--- COPY us_congress_members
--- FROM '/private/tmp/data/us_congress_members.csv'
--- WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+COPY us_congress_members
+FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\us_congress_members.csv'
+WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 
-SELECT * FROM us_congress_members
+
 
 -- SQLBook: Markup
 <font size = "5">
@@ -190,15 +175,10 @@ SELECT * FROM bills_actions
 -- Note in the instructor's computer this is:
 -- You just have to change the FROM argument
 --
--- COPY bills_actions
--- FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\bills_actions.csv'
--- WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
-
 COPY bills_actions
-FROM '/private/tmp/QTM151 Lec 18 data/bills_actions.csv'
+FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\bills_actions.csv'
 WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 
-SELECT * FROM bills_actions
 
 -- SQLBook: Markup
 <font size = "5">
@@ -259,8 +239,8 @@ Merge Databases
 -----  ON data1.key = data2.key
 
 SELECT * 
-FROM us_congress_members 
-LEFT JOIN bills_actions
+FROM bills_actions
+LEFT JOIN us_congress_members
 ON us_congress_members.member_id  = bills_actions.member_id;
 
 -- Note: This command may take a few seconds to run. This is normal
@@ -275,10 +255,9 @@ Try it yourself!
 -- SQLBook: Code
 -- Write your own code
 
-SELECT chamber,       
-       COUNT(*) AS num_members       
-FROM us_congress_members
-GROUP BY chamber;
+
+
+
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> IV. (Optional) Additional Resources </span>
