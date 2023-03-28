@@ -145,6 +145,7 @@ SELECT "driverId",
 FROM results
 GROUP BY "driverId"
 ORDER by SUM(milliseconds)
+
 -- SQLBook: Markup
 <font size = "5">
 
