@@ -255,9 +255,10 @@ Try it yourself!
 -- SQLBook: Code
 -- Write your own code
 
-
-
-
+SELECT chamber,
+    COUNT(*) AS num_members       
+FROM us_congress_members
+GROUP BY chamber;    
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> IV. (Optional) Additional Resources </span>

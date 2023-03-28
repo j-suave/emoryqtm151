@@ -132,7 +132,7 @@ FROM drivers
 <font size = "3">
 
 - Obtain the average of "milliseconds" by "driverId" using ```GROUP BY```
-- User ```ORDER BY ``` to sort on the sum of points
+- User ```ORDER BY ``` to sort on the sum of milliseconds
 
 HINT: See the end of lectures 17 and 18 for details <br>
 HINT: Include "driverId" in quotations since it has a mix of <br>
@@ -144,7 +144,7 @@ SELECT "driverId",
         AVG(milliseconds) AS mean_milliseconds
 FROM results
 GROUP BY "driverId"
-ORDER by SUM(position)
+ORDER by SUM(milliseconds)
 -- SQLBook: Markup
 <font size = "5">
 
@@ -161,6 +161,7 @@ HINT: Include "driverId" in quotations since it has a mix of <br>
 upper case and lower case letters
 -- SQLBook: Code
 -- Write your own code
+
 SELECT *
 FROM results
 LEFT JOIN drivers
