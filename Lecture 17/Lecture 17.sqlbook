@@ -36,6 +36,7 @@ panel on the left:
 
 Delete existing table
 -- SQLBook: Code
+-- Active: 1679082813397@@127.0.0.1@5432@postgres
 -- If the table already exists we can drop it:
 -- If it doesn't exist nothing happens
 -- System commands are in upper case and user defined
@@ -68,13 +69,13 @@ Add rows to table
 -- You write system commands in capital letters to easily distinguish
 -- column names from system commands
 
-INSERT INTO drivers  VALUES (1, 'Lewis Hamilton','British',103);
+INSERT INTO drivers  VALUES (1, 'Lewis Hamilton','British', 103);
 
-INSERT INTO drivers  VALUES (4, 'Fernando Alonso', 'Spanish',32);
+INSERT INTO drivers  VALUES (4, 'Fernando Alonso', 'Spanish', 32);
 
-INSERT INTO drivers  VALUES (3, 'Sebastian Vettel', 'German',91);
+INSERT INTO drivers  VALUES (3, 'Sebastian Vettel', 'German', 91);
 
-INSERT INTO drivers  VALUES (2, 'Michael Schumacher', 'German',53);
+INSERT INTO drivers  VALUES (2, 'Michael Schumacher', 'German', 53);
 
 -- SQLBook: Markup
 <font size="5"> 
@@ -99,7 +100,9 @@ Try it yourself!
 -- Select a new driver id (needs to be unique)
 -- Make sure to deparate arguments by a semicolon!
 
+INSERT INTO drivers  VALUES (5, 'John Jaquez','Dominican', 9);
 
+INSERT INTO drivers  VALUES (6, 'Zaria Montgomery', 'African Americ', 3);
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Dataset Operations </span>
@@ -113,19 +116,23 @@ Extracting columns from table
 -- FROM is used to indicate the source table
 
 SELECT driver_id, nationality FROM drivers;
+
 -- SQLBook: Markup
 <font size="5"> 
 
 Extract all columns from table
 -- SQLBook: Code
 -- The symbol "*" is a shorthand for "all variables"
+
 SELECT * FROM drivers;
+
 -- SQLBook: Markup
 <font size = "5">
 
 Subsetting rows
 -- SQLBook: Code
 -- The WHERE command evaluates logical conditions to subset rows
+
 SELECT * FROM drivers
 WHERE nationality = 'German';
 
@@ -159,6 +166,7 @@ Sort
 -- SQLBook: Code
 -- Order in ascending order of victories
 -- Remember that * means that all columns are selected
+
 SELECT * FROM drivers
 ORDER BY victories ASC;
 
@@ -187,7 +195,8 @@ with more than 60 victories
 -- SQLBook: Code
 -- Write your own code!
 
-
+SELECT nationality, driver_id FROM drivers
+WHERE victories > 60
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> III. Groupby + Chaining </span>

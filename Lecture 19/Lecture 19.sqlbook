@@ -88,19 +88,40 @@ The quiz will use the Formula 1 dataset
 with column names and data types
 - You will need to use the SQL command ``` CREATE TABLE ```
 
+-- SQLBook: Code
+
+DROP TABLE IF EXISTS results;
+
+CREATE TABLE results (
+    "raceId" int,
+    "driverId" int, 
+    lap int, 
+    position int,  
+    time varchar(255),
+    milliseconds int
+);
+
 -- SQLBook: Markup
 
 <font size = "5">
 
 (b) Import rows
 
-- Be able to find a paste the path of a file on your computer
+- Be able to find and paste the path of a file on your computer
 - For table created in part (a) import the data <br>
 from ".csv" files using the command <br>
 ```COPY ... FROM .... WITH ()```
 - Display the dataset using ``` SELECT * FROM .... ```
 - See Lecture 18 for more details
 
+-- SQLBook: Code
+-- Active: 1679082813397@@127.0.0.1@5432@postgres
+
+COPY results
+FROM '/private/tmp/Assignment 8/data_raw/lap_times.csv'
+WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+
+SELECT * FROM results
 -- SQLBook: Markup
 <font size = "5">
 
@@ -108,6 +129,19 @@ from ".csv" files using the command <br>
 
 - Subset one of the above datasets using ``` WHERE ```
 - Then sort the datasets in ascending or descending order 
+-- SQLBook: Code
+
+SELECT nationality, driver_id FROM drivers
+WHERE victories > 60
+
+SELECT * FROM drivers
+WHERE (nationality = 'United States') OR (nationality = 'Indian');
+
+-- Evaluate AND conditions
+SELECT * FROM drivers
+WHERE (nationality = 'German') AND (driver_id = 2);
+ORDER BY victories ASC;
+
 -- SQLBook: Markup
 <font size = "5">
 
@@ -120,6 +154,17 @@ from ".csv" files using the command <br>
 
 
 HINT: See the end of lectures 17
+-- SQLBook: Code
+
+SELECT nationality,
+       SUM(victories) AS sum_victories,
+       AVG(victories) AS mean_victories,
+       MIN(victories) AS min_victories,
+       MAX(victories) AS max_victories
+FROM drivers
+WHERE nationality = 'German'
+GROUP BY nationality
+
 -- SQLBook: Markup
 <font size = "5">
 
@@ -129,6 +174,17 @@ HINT: See the end of lectures 17
 - Then sort using ``` ORDER BY ```
 
 HINT: See the end of lectures 17 and 18
+-- SQLBook: Code
+
+SELECT nationality,
+       SUM(victories) AS sum_victories,
+       AVG(victories) AS mean_victories,
+       MIN(victories) AS min_victories,
+       MAX(victories) AS max_victories
+FROM drivers
+WHERE nationality = 'German'
+GROUP BY nationality
+ORDER BY SUM(victories)
 -- SQLBook: Markup
 <font size = "5">
 
@@ -136,3 +192,14 @@ HINT: See the end of lectures 17 and 18
 
 - Compute an aggregate statistict using ```GROUP BY```
 - Subset one of the above datasets using ``` HAVING ```
+-- SQLBook: Code
+
+SELECT nationality,
+       SUM(victories) AS sum_victories,
+       AVG(victories) AS mean_victories,
+       MIN(victories) AS min_victories,
+       MAX(victories) AS max_victories
+FROM drivers
+WHERE nationality = 'German'
+GROUP BY nationality
+HAVING SUM(victories) > 50;

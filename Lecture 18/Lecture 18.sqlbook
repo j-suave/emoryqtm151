@@ -189,6 +189,8 @@ COPY bills_actions
 FROM '/private/tmp/QTM151 Lec 18 data/bills_actions.csv'
 WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 
+SELECT * FROM bills_actions
+
 -- SQLBook: Markup
 <font size = "5">
 
