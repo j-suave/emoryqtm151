@@ -131,6 +131,7 @@ SELECT * FROM results
 - Then sort the datasets in ascending or descending order 
 -- SQLBook: Code
 
+
 SELECT nationality, driver_id FROM drivers
 WHERE victories > 60
 
