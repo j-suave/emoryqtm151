@@ -168,7 +168,7 @@ SELECT "raceId",
     COUNT("raceId") as "num_raceIds_rows"
 FROM constructor_standings
 GROUP BY "raceId"
-HAVING Count("raceId") > 15;
+HAVING Count("raceId") >= 15;
 
 -- SQLBook: Code
 
