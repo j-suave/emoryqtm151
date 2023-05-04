@@ -46,7 +46,7 @@ CREATE TABLE results (
 );
 
 COPY results
-From '/private/tmp/lap_times.csv'
+From '//private/tmp/Assignment9_data_raw/lap_times.csv'
 WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 
 -- SQLBook: Markup
@@ -78,7 +78,7 @@ CREATE TABLE drivers (
 );
 
 COPY drivers 
-From '/private/tmp/drivers.csv'
+From '/private/tmp/Assignment9_data_raw/drivers.csv'
 WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 
 -- SQLBook: Markup
